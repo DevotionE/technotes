@@ -10,8 +10,8 @@ const Public = () => {
       </header>
       <main className="public__main">
         <p>
-          Located in Elegant Palm City, Niggi Driz Repairs Well Trained Workers
-          Available At Any Time To Meet Your Tech Needs.
+          Located in Elegant Palm City, Niggi Driz Repairs Has Well Trained
+          Workers Available At Any Time To Meet Your Tech Needs.
         </p>
         <address className="public__addr">
           Niggi Driz Repairs
