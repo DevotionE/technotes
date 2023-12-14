@@ -1,8 +1,12 @@
 import { useGetNotesQuery } from "./notesApiSlice";
 import Note from "./Note";
 import useAuth from "../../hooks/useAuth";
+import useTitle from "../../hooks/useTitle";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const NotesList = () => {
+  useTitle("techNotes: Notes List");
+
   const { username, isManager, isAdmin } = useAuth();
 
   const {
@@ -19,12 +23,10 @@ const NotesList = () => {
 
   let content;
 
-  if (isLoading) content = <p>Loading...</p>;
+  if (isLoading) content = <PulseLoader color={"#FFF"} />;
 
   if (isError) {
-    content = (
-      <p className={isError ? "errmsg" : "offscreen"}>{error?.data?.message}</p>
-    );
+    content = <p className="errmsg">{error?.data?.message}</p>;
   }
 
   if (isSuccess) {
@@ -43,27 +45,26 @@ const NotesList = () => {
       ids?.length &&
       filteredIds.map((noteId) => <Note key={noteId} noteId={noteId} />);
 
-    // eslint-disable-next-line
     content = (
       <table className="table table--notes">
         <thead className="table__thead">
           <tr>
             <th scope="col" className="table__th note__status">
-              UserName
+              Username
             </th>
             <th scope="col" className="table__th note__created">
-              created
+              Created
             </th>
-            <th scope="col" className="table__th  note__updated">
+            <th scope="col" className="table__th note__updated">
               Updated
             </th>
-            <th scope="col" className="table__th  note__title">
+            <th scope="col" className="table__th note__title">
               Title
             </th>
-            <th scope="col" className="table__th  note__owner">
+            <th scope="col" className="table__th note__username">
               Owner
             </th>
-            <th scope="col" className="table__th  note__edit">
+            <th scope="col" className="table__th note__edit">
               Edit
             </th>
           </tr>
@@ -72,5 +73,7 @@ const NotesList = () => {
       </table>
     );
   }
+
+  return content;
 };
 export default NotesList;

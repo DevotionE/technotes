@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 
 import useAuth from "../hooks/useAuth";
+import PulseLoader from "react-spinners/PulseLoader";
 
 const DASH_REGEX = /^\/dash(\/)?$/;
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/;
@@ -93,7 +94,7 @@ const DashHeader = () => {
   }
 
   const logoutButton = (
-    <button className="icon-button" title="Logout" onClick={onLogoutClicked}>
+    <button className="icon-button" title="Logout" onClick={sendLogout}>
       <FontAwesomeIcon icon={faRightFromBracket} />
     </button>
   );
@@ -102,7 +103,7 @@ const DashHeader = () => {
 
   let buttonContent;
   if (isLoading) {
-    buttonContent = <p>Logging Out...</p>;
+    buttonContent = <PulseLoader color={"#FFF"} />;
   } else {
     buttonContent = (
       <>
